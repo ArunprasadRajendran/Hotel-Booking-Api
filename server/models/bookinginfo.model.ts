@@ -25,3 +25,8 @@ export interface Bookings {
     passport_number?: string;
     address_proof?: string;
 }
+
+export interface CancelBooking {
+    id: number;
+    cancellation_reason: string;
+}

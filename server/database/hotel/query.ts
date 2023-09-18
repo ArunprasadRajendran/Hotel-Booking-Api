@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Bookings } from '../../models/bookinginfo.model';
+import { Bookings, CancelBooking } from '../../models/bookinginfo.model';
 import { connection } from '../../config/db.config';
 import moment from 'moment';
 
 interface BookingQueryInterface {
     createBooking: (data: Bookings) => string;
     updateBooking: (data: Bookings) => string;
+    cancelBooking: (params: CancelBooking) => string;
 }
 
 export const bookingQuery: BookingQueryInterface = {
@@ -25,6 +26,16 @@ export const bookingQuery: BookingQueryInterface = {
         payment_status = '${data.payment_status}',
         updated_time = '${updated_time}'
         WHERE id = ${data.id}`;
+        return query;
+    },
+
+    cancelBooking: (params: CancelBooking) => {
+        const updated_time: any = moment().format('YYYY-MM-DD HH:mm:ss');
+        const query: any = `Update Bookings
+        set cancellation_reason = '${params.cancellation_reason}',
+        active = 0,
+        updated_time = '${updated_time}'
+        WHERE id = ${params.id}`;
         return query;
     },
 };

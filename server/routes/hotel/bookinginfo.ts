@@ -34,4 +34,19 @@ router.put('/booking', async (req: Request, res: Response) => {
     }
 });
 
+// cancel bookings
+router.delete('/booking', async (req: Request, res: Response) => {
+    try {
+        logger.info(`Begin Router Execution for cancel booking`);
+        const params: any = req.query;
+        const response: any = await bookingInfo.cancelBooking(params);
+        res.send(response);
+        logger.info(`End Router Execution for cancel booking`);
+    } catch (error) {
+        res.status(constant.INTERNAL_SERVER_ERROR).send(error);
+        console.log(error);
+        logger.error(`${req.url} - ${error}`);
+    }
+});
+
 export = router;
