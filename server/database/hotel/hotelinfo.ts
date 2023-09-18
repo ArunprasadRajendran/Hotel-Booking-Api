@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { logger } from '../../logger';
 import { connection } from '../../config/db.config';
-import { Hostels } from '../../models/hostelinfo.model';
+import { Hotels } from '../../models/hotelinfo.model';
 
 interface HotelInfoInterface {
-    getAllHotels: () => Promise<Hostels[]>;
+    getAllHotels: () => Promise<Hotels[]>;
 }
 
 export const hotelInfo: HotelInfoInterface = {

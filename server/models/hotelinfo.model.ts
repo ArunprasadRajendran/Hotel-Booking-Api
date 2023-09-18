@@ -1,4 +1,5 @@
-export interface Hostels {
+export interface Hotels {
+    id?: number;
     name: string;
     phone_number: number;
     email: string;
