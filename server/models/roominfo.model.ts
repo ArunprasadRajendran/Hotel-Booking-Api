@@ -8,7 +8,6 @@ export interface Rooms {
     description: string;
     images: string[];
     price_per_night: number;
-    is_available: number;
     created_time?: string;
     updated_time?: string;
     active?: number;

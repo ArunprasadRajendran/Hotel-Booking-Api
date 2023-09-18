@@ -8,7 +8,7 @@ interface RoomInfoInterface {
 }
 
 export const roomInfo: RoomInfoInterface = {
-    getAllRooms: (id) =>
+    getAllRooms: (id: number) =>
         new Promise((resolve: any, reject: any) => {
             logger.info(`Begin SQL Execution for get AllRooms by hotel id`);
             const query: any = `SELECT * FROM Rooms where hotel_id = ${id} and active = 1`;

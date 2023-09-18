@@ -10,7 +10,7 @@ const router: Router = Router();
 router.get('/rooms/:hotelid', async (req: Request, res: Response) => {
     try {
         logger.info(`Begin Router Execution for get AllRooms by hotel id`);
-        const hotel_id = parseInt(req.params.hotelid);
+        const hotel_id: number = parseInt(req.params.hotelid);
         const response: Rooms[] = await roomInfo.getAllRooms(hotel_id);
         res.send(response);
         logger.info(`End Router Execution for get AllRooms by hotel id`);
