@@ -1,4 +1,3 @@
-
 export interface Bookings {
     id?: number;
     room_id: number;

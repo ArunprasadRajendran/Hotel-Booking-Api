@@ -6,6 +6,7 @@ import { bookingQuery } from './query';
 
 interface BookingInfoInterface {
     createBooking: (data: Bookings) => Promise<any>;
+    updateBooking: (data: Bookings) => Promise<any>;
 }
 
 export const bookingInfo: BookingInfoInterface = {
@@ -19,6 +20,20 @@ export const bookingInfo: BookingInfoInterface = {
                     return reject(error);
                 }
                 logger.info(`End SQL Execution for create hotel room booking`);
+                resolve(results);
+            });
+        }),
+
+    updateBooking: (data: Bookings) =>
+        new Promise((resolve: any, reject: any) => {
+            logger.info(`Begin SQL Execution for update Bookings`);
+            const query: string = bookingQuery.updateBooking(data);
+            connection.query(query, async (error: Error, results: any) => {
+                if (error) {
+                    logger.info(`Something went wrong in execution of SQL Query for update bookings`);
+                    return reject(error);
+                }
+                logger.info(`End SQL Execution for update bookings`);
                 resolve(results);
             });
         }),
