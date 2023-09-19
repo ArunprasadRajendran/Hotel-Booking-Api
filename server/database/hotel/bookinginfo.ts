@@ -6,6 +6,7 @@ import { bookingQuery } from './query';
 
 interface BookingInfoInterface {
     createBooking: (data: Bookings) => Promise<any>;
+    getAllBookings: (id: number) => Promise<Bookings[]>;
     updateBooking: (data: Bookings) => Promise<any>;
     cancelBooking: (params: CancelBooking) => Promise<any>;
 }
@@ -21,6 +22,20 @@ export const bookingInfo: BookingInfoInterface = {
                     return reject(error);
                 }
                 logger.info(`End SQL Execution for create hotel room booking`);
+                resolve(results);
+            });
+        }),
+
+    getAllBookings: (id: number) =>
+        new Promise((resolve: any, reject: any) => {
+            logger.info(`Begin SQL Execution for get all bookings by hotel id`);
+            const query: string = bookingQuery.getAllBookings(id);
+            connection.query(query, (error: Error, results: any) => {
+                if (error) {
+                    logger.info(`Something went wrong in execution of SQL Query for get all bookings by hotel id`);
+                    return reject(error);
+                }
+                logger.info(`End SQL Execution for get all bookings by hotel id`);
                 resolve(results);
             });
         }),

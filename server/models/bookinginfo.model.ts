@@ -5,6 +5,8 @@ export interface Bookings {
     check_in_date: string;
     check_out_date: string;
     booking_date: string;
+    adults: number;
+    childrens: number;
     total_price: number;
     payment_status: string;
     cancellation_reason: string;

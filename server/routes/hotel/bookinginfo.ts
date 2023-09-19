@@ -20,6 +20,21 @@ router.post('/booking', async (req: Request, res: Response) => {
     }
 });
 
+// get all bookings by hotel id
+router.get('/booking/:id', async (req: Request, res: Response) => {
+    try {
+        logger.info(`Begin Router Execution for get all bookings by hotel id`);
+        const hotel_id: number = parseInt(req.params.hotelid);
+        const response: any = await bookingInfo.getAllBookings(hotel_id);
+        res.send(response);
+        logger.info(`End Router Execution for get all bookings by hotel id`);
+    } catch (error) {
+        res.status(constant.INTERNAL_SERVER_ERROR).send(error);
+        console.log(error);
+        logger.error(`${req.url} - ${error}`);
+    }
+});
+
 // update bookings
 router.put('/booking', async (req: Request, res: Response) => {
     try {

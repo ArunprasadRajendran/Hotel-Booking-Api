@@ -5,6 +5,7 @@ import moment from 'moment';
 
 interface BookingQueryInterface {
     createBooking: (data: Bookings) => string;
+    getAllBookings: (id: number) => string;
     updateBooking: (data: Bookings) => string;
     cancelBooking: (params: CancelBooking) => string;
 }
@@ -16,12 +17,24 @@ export const bookingQuery: BookingQueryInterface = {
         return query;
     },
 
+    getAllBookings: (id: number) => {
+        const query: any = `SELECT B.*, R.room_number, G.*
+        FROM Bookings B
+        JOIN Rooms R ON B.room_id = R.id
+        JOIN Guest G ON B.guest_id = G.id
+        WHERE R.hotel_id = ${id}
+        AND B.active = 1;`;
+        return query;
+    },
+
     updateBooking: (data: Bookings) => {
         const updated_time: any = moment().format('YYYY-MM-DD HH:mm:ss');
         const query: any = `Update Bookings
         set check_in_date = '${data.check_in_date}',
         check_out_date =  '${data.check_out_date}',
         booking_date = '${data.booking_date}',
+        adults = '${data.adults}, 
+        childrens = '${data.childrens},
         total_price = ${data.total_price},
         payment_status = '${data.payment_status}',
         updated_time = '${updated_time}'
