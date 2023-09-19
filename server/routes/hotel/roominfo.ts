@@ -7,6 +7,20 @@ import { Rooms } from '../../models/roominfo.model';
 
 const router: Router = Router();
 
+// create rooms
+router.post('/room', async (req: Request, res: Response) => {
+    try {
+        logger.info(`Begin Router Execution for create room `);
+        const response: any = await roomInfo.createRoom(req.body);
+        res.send(response);
+        logger.info(`End Router Execution for create room`);
+    } catch (error) {
+        res.status(constant.INTERNAL_SERVER_ERROR).send(error);
+        console.log(error);
+        logger.error(`${req.url} - ${error}`);
+    }
+});
+
 // get all rooms by hotel id
 router.get('/rooms/:hotelid', async (req: Request, res: Response) => {
     try {

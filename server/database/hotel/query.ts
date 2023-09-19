@@ -2,7 +2,8 @@
 import { Bookings, CancelBooking } from '../../models/bookinginfo.model';
 import { connection } from '../../config/db.config';
 import moment from 'moment';
-import { RoomFilterParams } from '../../models/roominfo.model';
+import { RoomFilterParams, Rooms } from '../../models/roominfo.model';
+import { Hotels } from '../../models/hotelinfo.model';
 
 interface BookingQueryInterface {
     createBooking: (data: Bookings) => string;
@@ -55,10 +56,17 @@ export const bookingQuery: BookingQueryInterface = {
 };
 
 interface RoomQueryInterface {
+    createRoom: (data: Rooms) => string;
     getAvailableRooms: (params: RoomFilterParams) => string;
 }
 
 export const roomQuery: RoomQueryInterface = {
+    createRoom: (data: Rooms) => {
+        const query: any = `INSERT INTO hotel (hotel_id, room_number, room_type, beds, occupancy, description, images, price_per_night) 
+        VALUES (${data.hotel_id},${data.room_number},'${data.room_type}','${data.beds}',${data.occupancy},'${data.description}','${data.images}',${data.price_per_night});`;
+        return query;
+    },
+
     getAvailableRooms: (params: RoomFilterParams) => {
         let query: any = `SELECT *
         FROM Rooms R
@@ -83,6 +91,18 @@ export const roomQuery: RoomQueryInterface = {
         if (params.price_per_night) {
             query = query + ` AND R.price_per_night <= ${params.price_per_night}`;
         }
+        return query;
+    },
+};
+
+interface HotelQueryInterface {
+    createHotel: (data: Hotels) => string;
+}
+
+export const hotelQuery: HotelQueryInterface = {
+    createHotel: (data: Hotels) => {
+        const query: any = `INSERT INTO hotel (name, phone_number, email, website, images, facilities, star_rating, address, city, state, country, postal_code) 
+        VALUES ('${data.name}',${data.phone_number},'${data.email}','${data.website}','${data.images}','${data.facilities}',${data.star_rating},'${data.address}','${data.city}','${data.state}','${data.country}',${data.postal_code});`;
         return query;
     },
 };

@@ -2,12 +2,28 @@
 import { logger } from '../../logger';
 import { connection } from '../../config/db.config';
 import { Hotels } from '../../models/hotelinfo.model';
+import { hotelQuery } from './query';
 
 interface HotelInfoInterface {
+    createHotel: (data: Hotels) => Promise<any>;
     getAllHotels: () => Promise<Hotels[]>;
 }
 
 export const hotelInfo: HotelInfoInterface = {
+    createHotel: (data: Hotels) =>
+        new Promise((resolve: any, reject: any) => {
+            logger.info(`Begin SQL Execution for create hotel`);
+            const query: string = hotelQuery.createHotel(data);
+            connection.query(query, async (error: Error, results: any) => {
+                if (error) {
+                    logger.info(`Something went wrong in execution of SQL Query for create hotel`);
+                    return reject(error);
+                }
+                logger.info(`End SQL Execution for create hotel`);
+                resolve(results);
+            });
+        }),
+
     getAllHotels: () =>
         new Promise((resolve: any, reject: any) => {
             logger.info(`Begin SQL Execution for get AllHotels`);
