@@ -2,6 +2,7 @@
 import { Bookings, CancelBooking } from '../../models/bookinginfo.model';
 import { connection } from '../../config/db.config';
 import moment from 'moment';
+import { RoomFilterParams } from '../../models/roominfo.model';
 
 interface BookingQueryInterface {
     createBooking: (data: Bookings) => string;
@@ -49,6 +50,39 @@ export const bookingQuery: BookingQueryInterface = {
         active = 0,
         updated_time = '${updated_time}'
         WHERE id = ${params.id}`;
+        return query;
+    },
+};
+
+interface RoomQueryInterface {
+    getAvailableRooms: (params: RoomFilterParams) => string;
+}
+
+export const roomQuery: RoomQueryInterface = {
+    getAvailableRooms: (params: RoomFilterParams) => {
+        let query: any = `SELECT *
+        FROM Rooms R
+        WHERE R.hotel_id = ${params.hotel_id} AND R.id NOT IN (
+            SELECT DISTINCT B.room_id
+            FROM Bookings B
+            WHERE (
+                (B.check_in_date >= '${params.check_in_date}' AND B.check_in_date <= '${params.check_out_date}')
+                OR
+                (B.check_out_date >= '${params.check_in_date}' AND B.check_out_date <= '${params.check_out_date}')
+                OR
+                (B.check_in_date <= '${params.check_in_date}' AND B.check_out_date >= '${params.check_out_date}')
+            )
+        )`;
+        // Additional filters
+        if (params.occupancy) {
+            query = query + ` AND R.occupancy = ${params.occupancy}`;
+        }
+        if (params.room_type) {
+            query = query + ` AND R.room_type = ${params.room_type}`;
+        }
+        if (params.price_per_night) {
+            query = query + ` AND R.price_per_night <= ${params.price_per_night}`;
+        }
         return query;
     },
 };

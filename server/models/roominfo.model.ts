@@ -12,3 +12,12 @@ export interface Rooms {
     updated_time?: string;
     active?: number;
 }
+
+export interface RoomFilterParams {
+    hotel_id: number;
+    check_in_date: string;
+    check_out_date: string;
+    room_type?: string;
+    occupancy?: number;
+    price_per_night?: number;
+}

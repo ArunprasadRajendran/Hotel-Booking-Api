@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response, Router } from 'express';
 import { logger } from '../../logger';
 import { constant } from '../../../constant';
@@ -14,6 +15,21 @@ router.get('/rooms/:hotelid', async (req: Request, res: Response) => {
         const response: Rooms[] = await roomInfo.getAllRooms(hotel_id);
         res.send(response);
         logger.info(`End Router Execution for get AllRooms by hotel id`);
+    } catch (error) {
+        res.status(constant.INTERNAL_SERVER_ERROR).send(error);
+        console.log(error);
+        logger.error(`${req.url} - ${error}`);
+    }
+});
+
+// get available rooms by user information
+router.get('/rooms', async (req: Request, res: Response) => {
+    try {
+        logger.info(`Begin Router Execution for get available rooms by user information`);
+        const params: any = req.query;
+        const response: Rooms[] = await roomInfo.getAvailableRooms(params);
+        res.send(response);
+        logger.info(`End Router Execution for get available rooms by user information`);
     } catch (error) {
         res.status(constant.INTERNAL_SERVER_ERROR).send(error);
         console.log(error);
