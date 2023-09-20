@@ -637,6 +637,14 @@
                         "schema": {
                             "type": "object",
                             "properties": {
+                                "id": {
+                                    "type": "number",
+                                    "description": "The ID of the booking to be updated."
+                                },
+                                "room_id": {
+                                    "type": "number",
+                                    "description": "The ID of the room to be updated."
+                                },
                                 "check_in_date": {
                                     "type": "string",
                                     "format": "date",
@@ -646,11 +654,6 @@
                                     "type": "string",
                                     "format": "date",
                                     "description": "New check-out date for the booking."
-                                },
-                                "booking_date": {
-                                    "type": "string",
-                                    "format": "date",
-                                    "description": "New booking date for the booking."
                                 },
                                 "adults": {
                                     "type": "number",
@@ -679,9 +682,10 @@
                                 }
                             },
                             "required": [
+                                "id",
+                                "room_id",
                                 "check_in_date",
                                 "check_out_date",
-                                "booking_date",
                                 "adults",
                                 "childrens",
                                 "total_price",

@@ -30,17 +30,8 @@ export const bookingQuery: BookingQueryInterface = {
     },
 
     updateBooking: (data: Bookings) => {
-        const updated_time: any = moment().format('YYYY-MM-DD HH:mm:ss');
-        const query: any = `Update Bookings
-        set check_in_date = '${data.check_in_date}',
-        check_out_date =  '${data.check_out_date}',
-        booking_date = '${data.booking_date}',
-        adults = '${data.adults}, 
-        childrens = '${data.childrens},
-        total_price = ${data.total_price},
-        payment_status = '${data.payment_status}',
-        updated_time = '${updated_time}'
-        WHERE id = ${data.id}`;
+        const escapedInputData: string = connection.escape(getStringifyData(data));
+        const query: any = `CALL api_update_booking (${escapedInputData})`;
         return query;
     },
 
