@@ -6,6 +6,8 @@ import apiRouter from './routes';
 import cors from 'cors';
 import morgan from 'morgan';
 import { logger } from './logger/index';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocs from '../swagger.json';
 
 export class DBServer {
     private port: number;
@@ -32,6 +34,9 @@ export class DBServer {
 
         // Requests start with /api will be handled by the apiRouter page
         this.server.use('/api', apiRouter);
+
+        //Swagger implementation
+        this.server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
         // Use to see all the Api endpoints
         this.server.get('/', (req: Request, res: Response) => {

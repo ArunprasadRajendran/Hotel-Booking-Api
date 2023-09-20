@@ -1,0 +1,627 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Hotel Booking API Service Documentation",
+        "version": "3.0.0",
+        "title": "API Documentation"
+    },
+    "schemes": [
+        "http"
+    ],
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+        "/api/hotelinfo/hotels": {
+            "get": {
+                "summary": "The hotels API fetches all the hotels in the database",
+                "description": "Table: Hotels",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucessfully received the list of hotels from the database",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "number",
+                                        "description": "The unique identifier for the hotel"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the hotel"
+                                    },
+                                    "phone_number": {
+                                        "type": "number",
+                                        "description": "The phone number of the hotel"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "The email address of the hotel"
+                                    },
+                                    "website": {
+                                        "type": "string",
+                                        "description": "The website URL of the hotel"
+                                    },
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "description": "An array of image URLs for the hotel"
+                                    },
+                                    "facilities": {
+                                        "type": "string",
+                                        "description": "The facilities available at the hotel"
+                                    },
+                                    "star_rating": {
+                                        "type": "number",
+                                        "description": "The star rating of the hotel"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "description": "The address of the hotel"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "description": "The city where the hotel is located"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "description": "The state where the hotel is located"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "description": "The country where the hotel is located"
+                                    },
+                                    "postal_code": {
+                                        "type": "number",
+                                        "description": "The postal code of the hotel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hotelinfo/hotel": {
+            "post": {
+                "summary": "Create a new hotel in the database",
+                "description": "Table: Hotels",
+                "parameters": [
+                    {
+                        "name": "hotel",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "number",
+                                    "description": "The unique identifier for the hotel (optional)"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name of the hotel"
+                                },
+                                "phone_number": {
+                                    "type": "number",
+                                    "description": "The phone number of the hotel"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "description": "The email address of the hotel"
+                                },
+                                "website": {
+                                    "type": "string",
+                                    "description": "The website URL of the hotel"
+                                },
+                                "images": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "An array of image URLs for the hotel"
+                                },
+                                "facilities": {
+                                    "type": "string",
+                                    "description": "The facilities available at the hotel"
+                                },
+                                "star_rating": {
+                                    "type": "number",
+                                    "description": "The star rating of the hotel"
+                                },
+                                "address": {
+                                    "type": "string",
+                                    "description": "The address of the hotel"
+                                },
+                                "city": {
+                                    "type": "string",
+                                    "description": "The city where the hotel is located"
+                                },
+                                "state": {
+                                    "type": "string",
+                                    "description": "The state where the hotel is located"
+                                },
+                                "country": {
+                                    "type": "string",
+                                    "description": "The country where the hotel is located"
+                                },
+                                "postal_code": {
+                                    "type": "number",
+                                    "description": "The postal code of the hotel"
+                                },
+                                "created_time": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp indicating when the hotel was created (optional)"
+                                },
+                                "active": {
+                                    "type": "number",
+                                    "description": "A flag indicating whether the hotel is active (optional)"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully created a new hotel",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "A success message"
+                                },
+                                "hotel": {
+                                    "type": "object",
+                                    "description": "The created hotel object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. Invalid input data."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                }
+            }
+        },
+        "/api/roominfo/room": {
+            "post": {
+                "summary": "Create a new room",
+                "description": "Endpoint for creating a new room.",
+                "parameters": [
+                    {
+                        "name": "room",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "number",
+                                    "description": "The unique identifier for the room (optional)"
+                                },
+                                "hotel_id": {
+                                    "type": "number",
+                                    "description": "The ID of the hotel to which the room belongs",
+                                    "required": true
+                                },
+                                "room_number": {
+                                    "type": "number",
+                                    "description": "The room number",
+                                    "required": true
+                                },
+                                "room_type": {
+                                    "type": "string",
+                                    "description": "The type of the room",
+                                    "required": true
+                                },
+                                "beds": {
+                                    "type": "string",
+                                    "description": "The type of beds in the room",
+                                    "required": true
+                                },
+                                "occupancy": {
+                                    "type": "number",
+                                    "description": "The maximum occupancy of the room",
+                                    "required": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "A description of the room"
+                                },
+                                "images": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "An array of image URLs for the room"
+                                },
+                                "price_per_night": {
+                                    "type": "number",
+                                    "description": "The price per night for the room",
+                                    "required": true
+                                },
+                                "created_time": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp indicating when the room was created (optional)"
+                                },
+                                "active": {
+                                    "type": "number",
+                                    "description": "A flag indicating whether the room is active (optional)"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Room created successfully"
+                    }
+                }
+            }
+        },
+        "/api/roominfo/rooms/{hotelid}": {
+            "get": {
+                "summary": "Fetch rooms by hotel ID",
+                "description": "Retrieve a list of rooms for a specific hotel by providing the hotel's ID.",
+                "parameters": [
+                    {
+                        "name": "hotelid",
+                        "in": "path",
+                        "description": "The ID of the hotel to retrieve rooms for.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the list of rooms for the specified hotel.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "hotel_id": {
+                                        "type": "integer"
+                                    },
+                                    "room_number": {
+                                        "type": "integer"
+                                    },
+                                    "room_type": {
+                                        "type": "string"
+                                    },
+                                    "beds": {
+                                        "type": "string"
+                                    },
+                                    "occupancy": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "price_per_night": {
+                                        "type": "number"
+                                    },
+                                    "created_time": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "updated_time": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel not found or no rooms available for the specified hotel."
+                    }
+                }
+            }
+        },
+        "/api/roominfo/rooms": {
+            "get": {
+                "summary": "Fetch available rooms based on user options",
+                "description": "Retrieve a list of available rooms based on user-selected options such as hotel ID, check-in date, check-out date, room type, occupancy, and price per night.",
+                "parameters": [
+                    {
+                        "name": "hotel_id",
+                        "in": "query",
+                        "description": "The ID of the hotel for which available rooms are being retrieved.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "check_in_date",
+                        "in": "query",
+                        "description": "The check-in date in YYYY-MM-DD format.",
+                        "required": true,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "check_out_date",
+                        "in": "query",
+                        "description": "The check-out date in YYYY-MM-DD format.",
+                        "required": true,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "room_type",
+                        "in": "query",
+                        "description": "The type of room (optional). Example: standard, deluxe, suite",
+                        "type": "string"
+                    },
+                    {
+                        "name": "occupancy",
+                        "in": "query",
+                        "description": "The maximum occupancy of the room (optional).",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "price_per_night",
+                        "in": "query",
+                        "description": "The maximum price per night for filtering available rooms (optional).",
+                        "type": "number"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the list of available rooms based on user options.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "hotel_id": {
+                                        "type": "integer"
+                                    },
+                                    "room_number": {
+                                        "type": "integer"
+                                    },
+                                    "room_type": {
+                                        "type": "string"
+                                    },
+                                    "beds": {
+                                        "type": "string"
+                                    },
+                                    "occupancy": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "price_per_night": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No available rooms found based on the user's criteria."
+                    }
+                }
+            }
+        },
+        "/api/bookinginfo/booking": {
+            "post": {
+                "summary": "Create a new booking.",
+                "description": "Create a new booking with or without guest details.",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "booking",
+                        "description": "Booking information",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "number",
+                                    "description": "Unique identifier for the booking."
+                                },
+                                "room_id": {
+                                    "type": "number",
+                                    "description": "Identifier of the booked room.",
+                                    "required": true
+                                },
+                                "guest_id": {
+                                    "type": "number",
+                                    "description": "Identifier of the guest. Set to null if guest details are provided.",
+                                    "required": false
+                                },
+                                "check_in_date": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Check-in date for the booking.",
+                                    "required": true
+                                },
+                                "check_out_date": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Check-out date for the booking.",
+                                    "required": true
+                                },
+                                "booking_date": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Date and time when the booking was made.",
+                                    "required": true
+                                },
+                                "adults": {
+                                    "type": "number",
+                                    "description": "Number of adult guests.",
+                                    "required": true
+                                },
+                                "childrens": {
+                                    "type": "number",
+                                    "description": "Number of child guests.",
+                                    "required": true
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "description": "Total price for the booking.",
+                                    "required": true
+                                },
+                                "payment_status": {
+                                    "type": "string",
+                                    "enum": [
+                                        "paid",
+                                        "pending"
+                                    ],
+                                    "description": "Payment status for the booking. Must be 'paid' or 'pending'.",
+                                    "required": true
+                                },
+                                "created_time": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp indicating when the booking record was created.",
+                                    "required": false
+                                },
+                                "active": {
+                                    "type": "number",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ],
+                                    "description": "Flag indicating the booking's active status (0 for inactive, 1 for active).",
+                                    "required": false
+                                },
+                                "guest_details": {
+                                    "type": "object",
+                                    "properties": {
+                                        "first_name": {
+                                            "type": "string",
+                                            "description": "First name of the guest."
+                                        },
+                                        "last_name": {
+                                            "type": "string",
+                                            "description": "Last name of the guest."
+                                        },
+                                        "phone_number": {
+                                            "type": "number",
+                                            "description": "Phone number of the guest."
+                                        },
+                                        "email_id": {
+                                            "type": "string",
+                                            "description": "Email ID of the guest."
+                                        },
+                                        "date_of_birth": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "description": "Date of birth of the guest."
+                                        },
+                                        "address": {
+                                            "type": "string",
+                                            "description": "Address of the guest."
+                                        },
+                                        "city": {
+                                            "type": "string",
+                                            "description": "City of residence of the guest."
+                                        },
+                                        "state": {
+                                            "type": "string",
+                                            "description": "State of residence of the guest."
+                                        },
+                                        "country": {
+                                            "type": "string",
+                                            "description": "Country of residence of the guest."
+                                        },
+                                        "postal_code": {
+                                            "type": "number",
+                                            "description": "Postal code of the guest's address."
+                                        },
+                                        "passport_number": {
+                                            "type": "string",
+                                            "description": "Passport number of the guest."
+                                        },
+                                        "address_proof": {
+                                            "type": "string",
+                                            "description": "Address proof of the guest."
+                                        }
+                                    },
+                                    "required": [
+                                        "first_name",
+                                        "phone_number",
+                                        "email_id",
+                                        "date_of_birth",
+                                        "address",
+                                        "city",
+                                        "state",
+                                        "country",
+                                        "postal_code"
+                                    ],
+                                    "if": {
+                                        "properties": {
+                                            "guest_id": {
+                                                "type": "number",
+                                                "enum": [
+                                                    null
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Booking created successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Invalid input data."
+                    }
+                }
+            }
+        }
+    }
+}

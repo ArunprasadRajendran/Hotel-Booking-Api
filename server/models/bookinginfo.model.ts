@@ -13,19 +13,20 @@ export interface Bookings {
     created_time?: string;
     updated_time?: string;
     active?: number;
-    // Guest
-    first_name: string;
-    last_name?: string;
-    phone_number: number;
-    email_id: string;
-    date_of_birth: string;
-    address: string;
-    city: string;
-    state: string;
-    country: string;
-    postal_code: number;
-    passport_number?: string;
-    address_proof?: string;
+    guest_details: {
+        first_name: string;
+        last_name?: string;
+        phone_number: number;
+        email_id: string;
+        date_of_birth: string;
+        address: string;
+        city: string;
+        state: string;
+        country: string;
+        postal_code: number;
+        passport_number?: string;
+        address_proof?: string;
+    };
 }
 
 export interface CancelBooking {

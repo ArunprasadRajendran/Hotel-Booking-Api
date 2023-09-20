@@ -14,7 +14,8 @@
         "skipLibCheck": true,
         "sourceMap": false,
         "strictNullChecks": false,
-        "target": "es6"
+        "target": "es6",
+        "resolveJsonModule": true
     },
     "include": [
         "server/**/*"
