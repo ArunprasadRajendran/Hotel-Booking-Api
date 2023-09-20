@@ -8,7 +8,7 @@
     "schemes": [
         "http"
     ],
-    "host": "http://43.204.147.178:3000",
+    "host": "43.204.147.178:3000",
     "basePath": "/",
     "paths": {
         "/api/hotelinfo/hotel": {
