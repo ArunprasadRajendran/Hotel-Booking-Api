@@ -13,7 +13,7 @@
     "paths": {
         "/api/hotelinfo/hotels": {
             "get": {
-                "summary": "The hotels API fetches all the hotels in the database",
+                "summary": "Fetches all the hotels in the database",
                 "description": "Table: Hotels",
                 "produces": [
                     "application/json"
@@ -619,6 +619,242 @@
                     },
                     "400": {
                         "description": "Bad request. Invalid input data."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update booking information",
+                "description": "Update booking information including check-in date, check-out date, booking date, number of adults, number of children, total price, payment status, and updated time.",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "booking",
+                        "description": "Updated booking information",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "check_in_date": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "New check-in date for the booking."
+                                },
+                                "check_out_date": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "New check-out date for the booking."
+                                },
+                                "booking_date": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "New booking date for the booking."
+                                },
+                                "adults": {
+                                    "type": "number",
+                                    "description": "New number of adult guests."
+                                },
+                                "childrens": {
+                                    "type": "number",
+                                    "description": "New number of child guests."
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "description": "New total price for the booking."
+                                },
+                                "payment_status": {
+                                    "type": "string",
+                                    "enum": [
+                                        "paid",
+                                        "pending"
+                                    ],
+                                    "description": "New payment status for the booking. Must be 'paid' or 'pending'."
+                                },
+                                "updated_time": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "New timestamp indicating when the booking information was updated."
+                                }
+                            },
+                            "required": [
+                                "check_in_date",
+                                "check_out_date",
+                                "booking_date",
+                                "adults",
+                                "childrens",
+                                "total_price",
+                                "payment_status",
+                                "updated_time"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Booking information updated successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Invalid input data."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Cancel a booking",
+                "description": "Cancel a booking by providing its ID and a cancellation reason.",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "description": "The ID of the booking to be deleted.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "query",
+                        "name": "cancellation_reason",
+                        "description": "The reason for cancellation of the booking.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Booking Cancelled successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Invalid input data."
+                    },
+                    "404": {
+                        "description": "Booking not found."
+                    }
+                }
+            }
+        },
+        "/api/bookinginfo/booking/{id}": {
+            "get": {
+                "summary": "Fetch bookings by hotel ID",
+                "description": "Retrieve a list of bookings for a specific hotel by providing the hotel's ID.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the hotel to retrieve bookings for.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the list of bookings for the specified hotel.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "hotel_id": {
+                                        "type": "integer"
+                                    },
+                                    "room_id": {
+                                        "type": "integer"
+                                    },
+                                    "check_in_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "check_out_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "booking_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "adults": {
+                                        "type": "number"
+                                    },
+                                    "childrens": {
+                                        "type": "number"
+                                    },
+                                    "total_price": {
+                                        "type": "number"
+                                    },
+                                    "payment_status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "paid",
+                                            "pending"
+                                        ]
+                                    },
+                                    "cancellation_reason": {
+                                        "type": "string"
+                                    },
+                                    "created_time": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "updated_time": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "active": {
+                                        "type": "integer"
+                                    },
+                                    "guest_details": {
+                                        "type": "object",
+                                        "properties": {
+                                            "first_name": {
+                                                "type": "string"
+                                            },
+                                            "last_name": {
+                                                "type": "string"
+                                            },
+                                            "phone_number": {
+                                                "type": "number"
+                                            },
+                                            "email_id": {
+                                                "type": "string"
+                                            },
+                                            "date_of_birth": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "address": {
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "type": "string"
+                                            },
+                                            "country": {
+                                                "type": "string"
+                                            },
+                                            "postal_code": {
+                                                "type": "number"
+                                            },
+                                            "passport_number": {
+                                                "type": "string"
+                                            },
+                                            "address_proof": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel not found or no bookings available for the specified hotel."
                     }
                 }
             }
