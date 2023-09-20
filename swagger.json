@@ -100,10 +100,6 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "id": {
-                                    "type": "number",
-                                    "description": "The unique identifier for the hotel (optional)"
-                                },
                                 "name": {
                                     "type": "string",
                                     "description": "The name of the hotel"
@@ -209,10 +205,6 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "id": {
-                                    "type": "number",
-                                    "description": "The unique identifier for the room (optional)"
-                                },
                                 "hotel_id": {
                                     "type": "number",
                                     "description": "The ID of the hotel to which the room belongs",
@@ -463,10 +455,6 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "id": {
-                                    "type": "number",
-                                    "description": "Unique identifier for the booking."
-                                },
                                 "room_id": {
                                     "type": "number",
                                     "description": "Identifier of the booked room.",
