@@ -11,83 +11,6 @@
     "host": "localhost:3000",
     "basePath": "/",
     "paths": {
-        "/api/hotelinfo/hotels": {
-            "get": {
-                "summary": "Fetches all the hotels in the database",
-                "description": "Table: Hotels",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sucessfully received the list of hotels from the database",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "number",
-                                        "description": "The unique identifier for the hotel"
-                                    },
-                                    "name": {
-                                        "type": "string",
-                                        "description": "The name of the hotel"
-                                    },
-                                    "phone_number": {
-                                        "type": "number",
-                                        "description": "The phone number of the hotel"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "description": "The email address of the hotel"
-                                    },
-                                    "website": {
-                                        "type": "string",
-                                        "description": "The website URL of the hotel"
-                                    },
-                                    "images": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "description": "An array of image URLs for the hotel"
-                                    },
-                                    "facilities": {
-                                        "type": "string",
-                                        "description": "The facilities available at the hotel"
-                                    },
-                                    "star_rating": {
-                                        "type": "number",
-                                        "description": "The star rating of the hotel"
-                                    },
-                                    "address": {
-                                        "type": "string",
-                                        "description": "The address of the hotel"
-                                    },
-                                    "city": {
-                                        "type": "string",
-                                        "description": "The city where the hotel is located"
-                                    },
-                                    "state": {
-                                        "type": "string",
-                                        "description": "The state where the hotel is located"
-                                    },
-                                    "country": {
-                                        "type": "string",
-                                        "description": "The country where the hotel is located"
-                                    },
-                                    "postal_code": {
-                                        "type": "number",
-                                        "description": "The postal code of the hotel"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/hotelinfo/hotel": {
             "post": {
                 "summary": "Create a new hotel in the database",
@@ -191,6 +114,81 @@
                         "description": "Internal server error."
                     }
                 }
+            },
+            "get": {
+                "summary": "Fetch all the hotels in the database",
+                "description": "Table: Hotels",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucessfully received the list of hotels from the database",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "number",
+                                        "description": "The unique identifier for the hotel"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the hotel"
+                                    },
+                                    "phone_number": {
+                                        "type": "number",
+                                        "description": "The phone number of the hotel"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "The email address of the hotel"
+                                    },
+                                    "website": {
+                                        "type": "string",
+                                        "description": "The website URL of the hotel"
+                                    },
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "description": "An array of image URLs for the hotel"
+                                    },
+                                    "facilities": {
+                                        "type": "string",
+                                        "description": "The facilities available at the hotel"
+                                    },
+                                    "star_rating": {
+                                        "type": "number",
+                                        "description": "The star rating of the hotel"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "description": "The address of the hotel"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "description": "The city where the hotel is located"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "description": "The state where the hotel is located"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "description": "The country where the hotel is located"
+                                    },
+                                    "postal_code": {
+                                        "type": "number",
+                                        "description": "The postal code of the hotel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/roominfo/room": {
@@ -264,84 +262,7 @@
                         "description": "Room created successfully"
                     }
                 }
-            }
-        },
-        "/api/roominfo/rooms/{hotelid}": {
-            "get": {
-                "summary": "Fetch rooms by hotel ID",
-                "description": "Retrieve a list of rooms for a specific hotel by providing the hotel's ID.",
-                "parameters": [
-                    {
-                        "name": "hotelid",
-                        "in": "path",
-                        "description": "The ID of the hotel to retrieve rooms for.",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully received the list of rooms for the specified hotel.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "hotel_id": {
-                                        "type": "integer"
-                                    },
-                                    "room_number": {
-                                        "type": "integer"
-                                    },
-                                    "room_type": {
-                                        "type": "string"
-                                    },
-                                    "beds": {
-                                        "type": "string"
-                                    },
-                                    "occupancy": {
-                                        "type": "integer"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "images": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "price_per_night": {
-                                        "type": "number"
-                                    },
-                                    "created_time": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                    },
-                                    "updated_time": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                    },
-                                    "active": {
-                                        "type": "integer"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Hotel not found or no rooms available for the specified hotel."
-                    }
-                }
-            }
-        },
-        "/api/roominfo/rooms": {
+            },
             "get": {
                 "summary": "Fetch available rooms based on user options",
                 "description": "Retrieve a list of available rooms based on user-selected options such as hotel ID, check-in date, check-out date, room type, occupancy, and price per night.",
@@ -435,6 +356,81 @@
                     },
                     "404": {
                         "description": "No available rooms found based on the user's criteria."
+                    }
+                }
+            }
+        },
+        "/api/roominfo/room/{hotelid}": {
+            "get": {
+                "summary": "Fetch rooms by hotel ID",
+                "description": "Retrieve a list of rooms for a specific hotel by providing the hotel's ID.",
+                "parameters": [
+                    {
+                        "name": "hotelid",
+                        "in": "path",
+                        "description": "The ID of the hotel to retrieve rooms for.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the list of rooms for the specified hotel.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "hotel_id": {
+                                        "type": "integer"
+                                    },
+                                    "room_number": {
+                                        "type": "integer"
+                                    },
+                                    "room_type": {
+                                        "type": "string"
+                                    },
+                                    "beds": {
+                                        "type": "string"
+                                    },
+                                    "occupancy": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "price_per_night": {
+                                        "type": "number"
+                                    },
+                                    "created_time": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "updated_time": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel not found or no rooms available for the specified hotel."
                     }
                 }
             }

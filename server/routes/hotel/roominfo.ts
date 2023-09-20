@@ -22,7 +22,7 @@ router.post('/room', async (req: Request, res: Response) => {
 });
 
 // get all rooms by hotel id
-router.get('/rooms/:hotelid', async (req: Request, res: Response) => {
+router.get('/room/:hotelid', async (req: Request, res: Response) => {
     try {
         logger.info(`Begin Router Execution for get AllRooms by hotel id`);
         const hotel_id: number = parseInt(req.params.hotelid);
@@ -37,7 +37,7 @@ router.get('/rooms/:hotelid', async (req: Request, res: Response) => {
 });
 
 // get available rooms by user information
-router.get('/rooms', async (req: Request, res: Response) => {
+router.get('/room', async (req: Request, res: Response) => {
     try {
         logger.info(`Begin Router Execution for get available rooms by user information`);
         const params: any = req.query;

@@ -22,7 +22,7 @@ router.post('/hotel', async (req: Request, res: Response) => {
 });
 
 // get all Hotels
-router.get('/hotels', async (req: Request, res: Response) => {
+router.get('/hotel', async (req: Request, res: Response) => {
     try {
         logger.info(`Begin Router Execution for get AllHotels`);
         const response: Hotels[] = await hotelInfo.getAllHotels();
