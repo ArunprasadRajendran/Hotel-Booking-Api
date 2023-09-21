@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable */
 import { Bookings, CancelBooking } from '../../models/bookinginfo.model';
 import { connection } from '../../config/db.config';
 import moment from 'moment';
@@ -7,7 +7,7 @@ import { Hotels } from '../../models/hotelinfo.model';
 
 interface BookingQueryInterface {
     createBooking: (data: Bookings) => string;
-    getAllBookings: (id: number) => string;
+    getAllBookings: (hotelId: number) => string;
     updateBooking: (data: Bookings) => string;
     cancelBooking: (params: CancelBooking) => string;
 }
@@ -19,12 +19,12 @@ export const bookingQuery: BookingQueryInterface = {
         return query;
     },
 
-    getAllBookings: (id: number) => {
+    getAllBookings: (hotelId: number) => {
         const query: any = `SELECT B.*, R.room_number, G.*
         FROM Bookings B
         JOIN Rooms R ON B.room_id = R.id
         JOIN Guest G ON B.guest_id = G.id
-        WHERE R.hotel_id = ${id}
+        WHERE R.hotel_id = ${hotelId}
         AND B.active = 1;`;
         return query;
     },
@@ -54,7 +54,7 @@ interface RoomQueryInterface {
 export const roomQuery: RoomQueryInterface = {
     createRoom: (data: Rooms) => {
         const query: any = `INSERT INTO Rooms (hotel_id, room_number, room_type, beds, occupancy, description, images, price_per_night) 
-        VALUES (${data.hotel_id},${data.room_number},'${data.room_type}','${data.beds}',${data.occupancy},'${data.description}','${data.images}',${data.price_per_night});`;
+        VALUES (${data.hotel_id},${data.room_number},'${data.room_type}','${JSON.stringify(data.beds)}', ${data.occupancy} ,'${data.description}','${JSON.stringify(data.images)}',${data.price_per_night});`;
         return query;
     },
 
@@ -77,10 +77,10 @@ export const roomQuery: RoomQueryInterface = {
             query = query + ` AND R.occupancy = ${params.occupancy}`;
         }
         if (params.room_type) {
-            query = query + ` AND R.room_type = ${params.room_type}`;
+            query = query + ` AND R.room_type = '${params.room_type}'`;
         }
         if (params.price_per_night) {
-            query = query + ` AND R.price_per_night <= ${params.price_per_night}`;
+            query = query + ` AND R.price_per_night <= '${params.price_per_night}'`;
         }
         return query;
     },
@@ -92,8 +92,8 @@ interface HotelQueryInterface {
 
 export const hotelQuery: HotelQueryInterface = {
     createHotel: (data: Hotels) => {
-        const query: any = `INSERT INTO hotels (name, phone_number, email, website, images, facilities, star_rating, address, city, state, country, postal_code) 
-        VALUES ('${data.name}',${data.phone_number},'${data.email}','${data.website}','${data.images}','${data.facilities}',${data.star_rating},'${data.address}','${data.city}','${data.state}','${data.country}',${data.postal_code});`;
+        const query: any = `INSERT INTO Hotels (name, phone_number, email, website, images, facilities, star_rating, address, city, state, country, postal_code) 
+        VALUES ('${data.name}',${data.phone_number},'${data.email}','${data.website}','${JSON.stringify(data.images)}','${data.facilities}',${data.star_rating},'${data.address}','${data.city}','${data.state}','${data.country}',${data.postal_code});`;
         return query;
     },
 };

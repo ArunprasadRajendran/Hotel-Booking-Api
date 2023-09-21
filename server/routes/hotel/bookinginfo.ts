@@ -21,11 +21,11 @@ router.post('/booking', async (req: Request, res: Response) => {
 });
 
 // get all bookings by hotel id
-router.get('/booking/:id', async (req: Request, res: Response) => {
+router.get('/booking/:hotelid', async (req: Request, res: Response) => {
     try {
         logger.info(`Begin Router Execution for get all bookings by hotel id`);
-        const hotel_id: number = parseInt(req.params.hotelid);
-        const response: any = await bookingInfo.getAllBookings(hotel_id);
+        const hotelId: number = parseInt(req.params.hotelid);
+        const response: any = await bookingInfo.getAllBookings(hotelId);
         res.send(response);
         logger.info(`End Router Execution for get all bookings by hotel id`);
     } catch (error) {

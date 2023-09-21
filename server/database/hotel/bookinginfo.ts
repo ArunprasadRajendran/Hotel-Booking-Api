@@ -6,7 +6,7 @@ import { bookingQuery } from './query';
 
 interface BookingInfoInterface {
     createBooking: (data: Bookings) => Promise<any>;
-    getAllBookings: (id: number) => Promise<Bookings[]>;
+    getAllBookings: (hotelId: number) => Promise<Bookings[]>;
     updateBooking: (data: Bookings) => Promise<any>;
     cancelBooking: (params: CancelBooking) => Promise<any>;
 }
@@ -26,10 +26,10 @@ export const bookingInfo: BookingInfoInterface = {
             });
         }),
 
-    getAllBookings: (id: number) =>
+    getAllBookings: (hotelId: number) =>
         new Promise((resolve: any, reject: any) => {
             logger.info(`Begin SQL Execution for get all bookings by hotel id`);
-            const query: string = bookingQuery.getAllBookings(id);
+            const query: string = bookingQuery.getAllBookings(hotelId);
             connection.query(query, (error: Error, results: any) => {
                 if (error) {
                     logger.info(`Something went wrong in execution of SQL Query for get all bookings by hotel id`);

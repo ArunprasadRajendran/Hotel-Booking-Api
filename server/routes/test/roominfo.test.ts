@@ -23,7 +23,7 @@ describe('Room Routes', () => {
             hotel_id: 1,
             room_number: 101,
             room_type: 'Standard',
-            beds: [{ type: 'double', quantity: 2 }], // Type of beds (e.g., Single, Double, King)
+            beds: '[{ type: "double", quantity: 2 }]', // Type of beds (e.g., Single, Double, King)
             occupancy: 2, // Maximum occupancy
             description: 'A comfortable and cozy room with a double bed.',
             images: ['image1.jpg', 'image2.jpg'], // Array of room images
@@ -56,7 +56,7 @@ describe('Room Routes', () => {
                 hotel_id: 1,
                 room_number: 101,
                 room_type: 'Standard',
-                beds: [{ type: 'double', quantity: 2 }],
+                beds: '[{ type: "double", quantity: 2 }]',
                 occupancy: 2,
                 description: 'A comfortable and cozy room with a double bed.',
                 images: ['image1.jpg', 'image2.jpg'],
@@ -67,7 +67,7 @@ describe('Room Routes', () => {
                 hotel_id: 1,
                 room_number: 102,
                 room_type: 'Deluxe',
-                beds: [{ type: 'double', quantity: 2 }],
+                beds: '[{ type: "double", quantity: 2 }]',
                 occupancy: 2,
                 description: 'A comfortable and cozy room with a double bed.',
                 images: ['image1.jpg', 'image2.jpg'],
@@ -99,7 +99,7 @@ describe('Room Routes', () => {
                 hotel_id: 1,
                 room_number: 101,
                 room_type: 'Standard',
-                beds: [{ type: 'double', quantity: 2 }],
+                beds: '[{ type: "double", quantity: 2 }]',
                 occupancy: 2,
                 description: 'A comfortable and cozy room with a double bed.',
                 images: ['image1.jpg', 'image2.jpg'],

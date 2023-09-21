@@ -25,63 +25,66 @@
                             "properties": {
                                 "name": {
                                     "type": "string",
-                                    "description": "The name of the hotel"
+                                    "description": "The name of the hotel",
+                                    "required": true
                                 },
                                 "phone_number": {
                                     "type": "number",
-                                    "description": "The phone number of the hotel"
+                                    "description": "The phone number of the hotel",
+                                    "required": true
                                 },
                                 "email": {
                                     "type": "string",
-                                    "description": "The email address of the hotel"
+                                    "description": "The email address of the hotel",
+                                    "required": true
                                 },
                                 "website": {
                                     "type": "string",
-                                    "description": "The website URL of the hotel"
+                                    "description": "The website URL of the hotel",
+                                    "required": true
                                 },
                                 "images": {
                                     "type": "array",
                                     "items": {
                                         "type": "string"
                                     },
-                                    "description": "An array of image URLs for the hotel"
+                                    "description": "An array of image URLs for the hotel",
+                                    "required": true
                                 },
                                 "facilities": {
                                     "type": "string",
-                                    "description": "The facilities available at the hotel"
+                                    "description": "The facilities available at the hotel",
+                                    "required": true
                                 },
                                 "star_rating": {
                                     "type": "number",
-                                    "description": "The star rating of the hotel"
+                                    "description": "The star rating of the hotel",
+                                    "required": true
                                 },
                                 "address": {
                                     "type": "string",
-                                    "description": "The address of the hotel"
+                                    "description": "The address of the hotel",
+                                    "required": true
                                 },
                                 "city": {
                                     "type": "string",
-                                    "description": "The city where the hotel is located"
+                                    "description": "The city where the hotel is located",
+                                    "required": true
                                 },
                                 "state": {
                                     "type": "string",
-                                    "description": "The state where the hotel is located"
+                                    "description": "The state where the hotel is located",
+                                    "required": true
                                 },
                                 "country": {
                                     "type": "string",
-                                    "description": "The country where the hotel is located"
+                                    "description": "The country where the hotel is located",
+                                    "required": true
                                 },
                                 "postal_code": {
                                     "type": "number",
-                                    "description": "The postal code of the hotel"
-                                },
-                                "created_time": {
-                                    "type": "string",
-                                    "format": "date-time",
-                                    "description": "Timestamp indicating when the hotel was created (optional)"
-                                },
-                                "active": {
-                                    "type": "number",
-                                    "description": "A flag indicating whether the hotel is active (optional)"
+                                    "description": "The postal code of the hotel",
+                                    "required": true
                                 }
                             }
                         }
@@ -183,6 +186,14 @@
                                     "postal_code": {
                                         "type": "number",
                                         "description": "The postal code of the hotel"
+                                    },
+                                    "created_time": {
+                                        "type": "string",
+                                        "description": "Timestamp indicating when the room was created"
+                                    },
+                                    "active": {
+                                        "type": "number",
+                                        "description": "A flag indicating whether the room is active"
                                     }
                                 }
                             }
@@ -219,8 +230,23 @@
                                     "required": true
                                 },
                                 "beds": {
-                                    "type": "string",
-                                    "description": "The type of beds in the room",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "bed_type": {
+                                                "type": "string",
+                                                "description": "The type of bed (e.g., single, double)",
+                                                "required": true
+                                            },
+                                            "quantity": {
+                                                "type": "number",
+                                                "description": "The quantity of beds of this type",
+                                                "required": true
+                                            }
+                                        }
+                                    },
+                                    "description": "An array of bed objects in the room",
                                     "required": true
                                 },
                                 "occupancy": {
@@ -720,13 +746,13 @@
                 }
             }
         },
-        "/api/bookinginfo/booking/{id}": {
+        "/api/bookinginfo/booking/{hotelid}": {
             "get": {
                 "summary": "Fetch bookings by hotel ID",
                 "description": "Retrieve a list of bookings for a specific hotel by providing the hotel's ID.",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "hotelid",
                         "in": "path",
                         "description": "The ID of the hotel to retrieve bookings for.",
                         "required": true,

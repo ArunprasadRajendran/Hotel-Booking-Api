@@ -3,7 +3,7 @@ export interface Rooms {
     hotel_id: number;
     room_number: number;
     room_type: string;
-    beds: object[];
+    beds: string;
     occupancy: number;
     description: string;
     images: string[];
