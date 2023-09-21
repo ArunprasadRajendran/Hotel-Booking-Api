@@ -53,7 +53,7 @@ interface RoomQueryInterface {
 
 export const roomQuery: RoomQueryInterface = {
     createRoom: (data: Rooms) => {
-        const query: any = `INSERT INTO hotel (hotel_id, room_number, room_type, beds, occupancy, description, images, price_per_night) 
+        const query: any = `INSERT INTO Rooms (hotel_id, room_number, room_type, beds, occupancy, description, images, price_per_night) 
         VALUES (${data.hotel_id},${data.room_number},'${data.room_type}','${data.beds}',${data.occupancy},'${data.description}','${data.images}',${data.price_per_night});`;
         return query;
     },
@@ -92,7 +92,7 @@ interface HotelQueryInterface {
 
 export const hotelQuery: HotelQueryInterface = {
     createHotel: (data: Hotels) => {
-        const query: any = `INSERT INTO hotel (name, phone_number, email, website, images, facilities, star_rating, address, city, state, country, postal_code) 
+        const query: any = `INSERT INTO hotels (name, phone_number, email, website, images, facilities, star_rating, address, city, state, country, postal_code) 
         VALUES ('${data.name}',${data.phone_number},'${data.email}','${data.website}','${data.images}','${data.facilities}',${data.star_rating},'${data.address}','${data.city}','${data.state}','${data.country}',${data.postal_code});`;
         return query;
     },

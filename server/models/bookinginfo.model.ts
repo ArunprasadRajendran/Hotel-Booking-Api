@@ -9,7 +9,7 @@ export interface Bookings {
     childrens: number;
     total_price: number;
     payment_status: string;
-    cancellation_reason: string;
+    cancellation_reason?: string;
     created_time?: string;
     updated_time?: string;
     active?: number;
